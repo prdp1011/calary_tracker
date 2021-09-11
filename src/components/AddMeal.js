@@ -1,13 +1,17 @@
 import React, {useState, useEffect}from 'react';
 import { useHistory } from "react-router-dom";
-import { ROUTES } from '../constants';
+import { ROUTES, SELECTED_MEAL } from '../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMeal , updateMeal} from '../actions/meal'
+
 
 const AddMeal = () => {
-    const [mealInfo, setmealInfo] = useState({ description: '', noOfCal: '' });
+    const [mealInfo, setmealInfo] = useState({...SELECTED_MEAL});
     const history = useHistory();
-
+    const state = useSelector(state => state.meal.selected_meal);
+    const dispatch = useDispatch();
     useEffect(() => {
-     
+        setmealInfo(state);
     }, []);
     
     const handleInput = (value, field) => {
@@ -15,9 +19,15 @@ const AddMeal = () => {
     }
   
     const addMeal = () => {
-  
+        // mealInfo
+        if(mealInfo._id){
+            dispatch(updateMeal(mealInfo, mealInfo._id, history));
+        } else {
+            mealInfo.created_on = (new Date()).toDateString();
+            dispatch(createMeal(mealInfo, history));
+        }
+       
     }
-    // date, text, and num of calories.
   return (
     <div>
 <div className="container">

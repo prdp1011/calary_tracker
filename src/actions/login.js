@@ -10,7 +10,7 @@ export const action_login = (payload, history) => {
             localStorage.setItem('isAuthenticated', 'true');
             dispatch({type: ACTION.LOGIN});
             history.push(ROUTES.MAIN);
-        });
+        }).catch(e => console.log(e));
     }
   }
   export const action_logout = (payload, history) => {
@@ -21,8 +21,7 @@ export const action_login = (payload, history) => {
           localStorage.setItem('isAuthenticated', 'false');
           dispatch({type: ACTION.LOGOUT});
           history.push(ROUTES.LOGIN);
-          
-        });
+        }).catch(e => console.log(e));
       
     }
   }

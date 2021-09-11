@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import { ROUTES } from './constants';
 import Login from './components/Login/Login';
-import AddMeal from './components/AddMeal';
 import NoMatch from './components/NoMatch';
 import Loader from './components/Loader';
 import Header from './components/Header';
@@ -16,12 +15,22 @@ import ApplicationError from './components/ErrorPages/ApplicationError';
 
 
 const DashComp = React.lazy(() => import('./components/Dashboard'));
+const AddMeal = React.lazy(() => import('./components/AddMeal'));
 
 const  Dashboard = () => {
   return (
     <div>
       <Suspense fallback={<Loader/>}>
         <DashComp/>
+      </Suspense>
+    </div>
+  );
+}
+const  ChangeMeal = () => {
+  return (
+    <div>
+      <Suspense fallback={<Loader/>}>
+        <AddMeal/>
       </Suspense>
     </div>
   );
@@ -57,9 +66,9 @@ function App() {
           <Dashboard />
         </PrivateRoute>
         <PrivateRoute exact path={ROUTES.ADD_MEAL}>
-          <AddMeal/>
+          <ChangeMeal/>
         </PrivateRoute>
-        <Route path="/login">
+        <Route path={ROUTES.LOGIN}>
           <Login />
         </Route>
         <Route exact path={ROUTES.APPLICATION_ERROR}>

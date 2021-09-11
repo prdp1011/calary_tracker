@@ -4,17 +4,17 @@ const Item = config.Item;
 
 exports.list = function(req, res) {
   console.log(req.currentUser);
-  const user_id = req.params.user_id;
+  const user_id = req.currentUserId;
    const existing_user_data = Item.find(li => li.user_id === user_id);
    if(!existing_user_data){
-    res.json([]);
+    res.json({items: []});
    }
    res.json(existing_user_data);
 };
 
 exports.create = function(req, res) {
   console.log(req.currentUser);
-    const user_id = req.body.user_id;
+    const user_id = req.currentUserId;
     req.body._id = config.id('item');
 
     const existing_user_data = Item.find(li => li.user_id === user_id);
@@ -30,7 +30,7 @@ exports.create = function(req, res) {
 
 exports.read = function(req, res) {
   const id = req.params.id;
-  const user_id = req.params.user_id;
+  const user_id = req.currentUserId;
   const existing_user_data = Item.find(li => li.user_id === user_id);
   const item = existing_user_data.items.find(li => li.id === id)
   if (!item) return response.sendNotFound(res);
@@ -39,7 +39,7 @@ exports.read = function(req, res) {
 
 exports.update = function(req, res) {
   const id = req.params.id;
-  const user_id = req.params.user_id;
+  const user_id = req.currentUserId;
   const existing_user_data = Item.find(li => li.user_id === user_id);
   const idx = existing_user_data.items.findIndex(li => li.id === id)
   if (idx === -1) return response.sendBadRequest(res, 'Not Found');
@@ -49,7 +49,7 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
   const id = req.params.id;
-  const user_id = req.params.user_id;
+  const user_id = req.currentUserId;
   const existing_user_data = Item.find(li => li.user_id === user_id);
   existing_user_data.items = existing_user_data.items.filter(li => li.id !== id)
   res.json(existing_user_data);

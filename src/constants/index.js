@@ -11,3 +11,17 @@ export const ROUTES = {
     NO_MATCH: '*'
   };
   
+  export const SELECTED_MEAL = {
+    _id: null,
+     description: '',
+     noOfCal: '',
+     created_on: '',
+     color: '' // RED, Green 
+  }
+  export const INTIAL_STATE = {
+    loading: false,
+    meals: [],
+    selected_meal: {...SELECTED_MEAL},
+    error: '',
+    isAuthorised: false
+  }

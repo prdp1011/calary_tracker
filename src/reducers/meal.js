@@ -1,19 +1,7 @@
 import { ACTION } from "../actions/types";
-const selected_meal = {
-   description: '',
-   noOfCal: '',
-   created_on: '',
-   color: '' // RED, Green 
-}
-const initialState = {
-  loading: false,
-  meals: [],
-  selected_meal,
-  error: '',
-  isAuthorised: false
-}
+import { SELECTED_MEAL, INTIAL_STATE } from "../constants";
 
-const mealReducer = (state = initialState, action) => {
+const mealReducer = (state = INTIAL_STATE, action) => {
   switch (action.type) {
     case ACTION.LOADING:
       return {
@@ -29,10 +17,11 @@ const mealReducer = (state = initialState, action) => {
     case ACTION.SELECTED_MEAL:
       return {
         ...state,
-        selected_meal: action.payload || {...selected_meal},
+        selected_meal: action.payload || {...SELECTED_MEAL},
     }
     case ACTION.ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload
       }

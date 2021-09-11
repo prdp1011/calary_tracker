@@ -11,12 +11,9 @@ const Login = () => {
   }
   const [loginInfo, setLoginInfo] = useState(intial);
   const [isLogin, setLoginPage] = useState(true);
+  // const [submitted, setSubmitted] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  // con
-
-
-  
   const handleInput = (value, field) => {
     setLoginInfo(loginInfo => ({ ...loginInfo, [field]: value }));
   }

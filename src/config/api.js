@@ -1,52 +1,56 @@
 import axios from 'axios';
 
 import { startloading, apiFailure } from "../actions/common";
+import { ROUTES } from '../constants';
 
 
 const Api = axios;
 // .create({
 //   baseURL: 'http://localhost:9000/'
 // });
-const Get =  (url) => async (dispatch) => {
+const error_msg = (dispatch, error, history = null) => {
+    dispatch(apiFailure(error.message));
+    console.log(error.response)
+    alert(error.response.data.message);
+    if(error.response.status === 401){
+      localStorage.setItem('isAuthenticated', 'false');
+      history?.push(ROUTES.LOGIN);
+    }
+    throw error;
+}
+const Get =  (url) => async (dispatch, history) => {
     dispatch(startloading())
     try {
-      const response = await Api.get(url);
-      return response;
+      return await axios.get(url);
     } catch (error) {
-      dispatch(apiFailure(error.message));
-      return Promise.reject(error);
+      console.log(error)
+      return error_msg(dispatch, error, history);
     }
 }
 
 const Post = (url, data) => async (dispatch) => {
     dispatch(startloading())
     try {
-      const response = await Api.post(url, data);
-      return response;
+      return await axios.post(url, data);
     } catch (error) {
-      dispatch(apiFailure(error.message));
-      return Promise.reject(error);
+      return error_msg(dispatch, error);
     }
 }
 
 const Patch = (url, data) => async (dispatch) => {
     dispatch(startloading())
     try {
-      const response = await Api.patch(url, data);
-      return response;
+      return await axios.put(url, data);
     } catch (error) {
-      dispatch(apiFailure(error.message));
-      return Promise.reject(error);
+        return error_msg(dispatch, error);
     }
 }
 const Delete = (url) => async (dispatch) => {
     dispatch(startloading())
     try {
-      const response = await Api.delete(url);
-      return response;
+      return  await axios.delete(url);
     } catch (error) {
-      dispatch(apiFailure(error.message));
-      return Promise.reject(error);
+      return error_msg(dispatch, error);
     }
 }
 export {Get, Post, Patch, Delete}  ;

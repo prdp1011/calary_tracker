@@ -1,11 +1,11 @@
 
 module.exports = {
   server: {
-    port: 300
+    port: 3001
   },
   key: {
     privateKey: 'test_tata_aig',
-    tokenExpireInMinutes: 1440
+    tokenExpireInMinutes: 144000
   },
   User: [],
   Item: [],
