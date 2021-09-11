@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import { ROUTES } from '../constants';
+import { fetchMeals } from '../actions/meal'
+import { useDispatch } from 'react-redux'
+
 const Dashboard = () => {
   const history = useHistory();
   const today = new Date();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMeals());
+  }, []);
   return (
     <main>
       <div className="container">
@@ -30,17 +38,7 @@ const Dashboard = () => {
                   <td>Otto</td>
                   <td>@mdo</td>
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colSpan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+                
               </tbody>
             </table>
           </div>
