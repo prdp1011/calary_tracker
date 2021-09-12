@@ -1,15 +1,17 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 
-import { ROUTES } from '../constants';
+import { action_logout } from '../actions/login';
 
 const Header = () => {
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const logout = () => {
     localStorage.setItem('isAuthenticated', 'false');
-    history.push(ROUTES.LOGIN);
+    dispatch(action_logout(history))
   }
   return (
     <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark maroon-bg">

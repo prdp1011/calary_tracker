@@ -1,7 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import jwt from'jsonwebtoken';
+import mongoose from'mongoose';
 import cookieParser from'cookie-parser';
+import db from './db';
+
+import User from './models/user';
+import Item from './models/item';
 import config from './config';
 import routes from './routes';
 

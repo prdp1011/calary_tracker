@@ -1,29 +1,22 @@
+import mongoose from 'mongoose';
 import {authenticate} from './auth';
 import response from '../helpers/response';
-import config from '../config';
 
-const User = config.User;
+const User = mongoose.model('User');
 
-exports.read = function(req, res) {
-  const {email, password} = req.body;
-  const existing = User.find(user => user.email === email && user.password === password) ;
-  if (!existing) 
-     return response.sendNotFound(res);
-  res.json(existing);
-};
 
-exports.create = function(req, res) {
-  const newUser = req.body;
-  const {email} = req.body;
-
-  const existing = User.find(user => user.email === email) ;
-  if(existing){
-    return  response.sendBadRequest(res, 'Existing User');
+exports.create = async function(req, res) {
+  try {
+    const existed = await User.findOne({email: req.body.email});
+    if(existed){
+      return  response.sendBadRequest(res, 'Existing User');
+    }
+    const newUser = new User(req.body);
+    await newUser.save();
+    await authenticate(req, res);
+  } catch (error) {
+    response.sendBadRequest(res, error)
   }
-  newUser._id = config.id('user');
-  User.push(newUser); 
-  return authenticate(req, res);
-
 };
 
 

@@ -8,7 +8,6 @@ routes.route('/')
   .post(items.create);
 
 routes.route('/:id')
-  .get(items.read)
   .put(items.update)
   .delete(items.delete);
 

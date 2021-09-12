@@ -28,29 +28,29 @@ const Get =  (url) => async (dispatch, history) => {
     }
 }
 
-const Post = (url, data) => async (dispatch) => {
+const Post = (url, data) => async (dispatch, history) => {
     dispatch(startloading())
     try {
       return await axios.post(url, data);
     } catch (error) {
-      return error_msg(dispatch, error);
+      return error_msg(dispatch, error, history);
     }
 }
 
-const Patch = (url, data) => async (dispatch) => {
+const Patch = (url, data) => async (dispatch, history) => {
     dispatch(startloading())
     try {
       return await axios.put(url, data);
     } catch (error) {
-        return error_msg(dispatch, error);
+        return error_msg(dispatch, error, history);
     }
 }
-const Delete = (url) => async (dispatch) => {
+const Delete = (url) => async (dispatch, history) => {
     dispatch(startloading())
     try {
       return  await axios.delete(url);
     } catch (error) {
-      return error_msg(dispatch, error);
+      return error_msg(dispatch, error, history);
     }
 }
 export {Get, Post, Patch, Delete}  ;

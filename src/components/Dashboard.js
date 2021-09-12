@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const Dashboard = () => {
   const history = useHistory();
-  const today = new Date();
   const dispatch = useDispatch();
   const state = useSelector(state => state);
   const meals = useSelector(state => state.meal.meals);
@@ -24,15 +23,10 @@ const Dashboard = () => {
   const deleteRow = (id) => {
       const res = window.confirm('Are you sure');
       if(res){
-        dispatch(removeMeal(id));
+        dispatch(removeMeal(id, history));
       }
   }
-
-// _id: null,
-// description: '',
-// noOfCal: '',
-// created_on: '',
-// color: ''
+  
   return (
     <main>
       <div className="container">
@@ -42,7 +36,7 @@ const Dashboard = () => {
             <div className="d-flex justify-content-end">
               <button className="btn btn-primary btn-xs" onClick={() => addorEditMeal(null)}><b>+</b> Add New Meal</button>
             </div>
-          
+            
             <table className="table">
               <thead>
                 <tr>
@@ -70,8 +64,6 @@ const Dashboard = () => {
                   </tr>)
                   })
                 }
-                
-                
               </tbody>
             </table>
           </div>

@@ -1,4 +1,5 @@
 import { ACTION } from "../actions/types";
+import { deepCopy } from "../helpers";
 
 const initialState = {
   isAuthorised: false
@@ -6,26 +7,24 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ACTION.LOGIN:
-      return {
+      return deepCopy({
         ...state,
         loading: false,
         isAuthorised: true
-    }
+    })
     case ACTION.SIGN_UP:
-      return {
+      return deepCopy({
         ...state,
         isAuthorised: true,
         loading: false,
-    }
+    })
     case ACTION.LOGOUT:
-      return {
+      return deepCopy({
         ...state,
         isAuthorised: false,
         loading: false,
-    }
-
+    })
     default: return state
   }
 }
