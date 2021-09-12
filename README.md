@@ -1,10 +1,13 @@
-# Getting Started with Create React App
+# Getting Started with Calorie Calculator App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run server`
+To start the Server
+Listen - http://localhost:3001
 
 ### `npm start`
 
