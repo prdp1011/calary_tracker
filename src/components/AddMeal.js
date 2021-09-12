@@ -50,7 +50,7 @@ const AddMeal = () => {
           <div id="login-column" className="col-md-6">
             <div id="login-box" className="col-md-12">
               <form id="login-form" className="form" action="" method="post">
-                <h3 className="text-center text-info">Add Meal</h3>
+                <h3 className="text-center text-info">{mealInfo._id ? 'Edit' : 'Add'}  Meal</h3>
                 <div className="form-group">
                   <label htmlFor="description" className="text-info">
                     Description:
