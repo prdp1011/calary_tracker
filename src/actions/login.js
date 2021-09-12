@@ -16,8 +16,10 @@ export const action_login = (payload, history) => {
     return (dispatch) => {
       Post('logout', payload)(dispatch, history)
         .then(() => {
-          localStorage.setItem('isAuthenticated', 'false');
           dispatch({type: ACTION.LOGOUT});
+          dispatch({type: ACTION.LOADED});
+          
+          localStorage.setItem('isAuthenticated', 'false');
           history.push(ROUTES.LOGIN);
         }).catch(e => console.log(e));
       
@@ -30,7 +32,6 @@ export const action_login = (payload, history) => {
         .then(() => {
           localStorage.setItem('isAuthenticated', 'true');
           dispatch({type: ACTION.SIGN_UP});
-          console.log(ROUTES);
           history.push(ROUTES.MAIN);
         });
       

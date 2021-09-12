@@ -7,5 +7,6 @@ export const ACTION = {
     LOGIN: 'LOGIN',
     SELECTED_MEAL:'SELECTED_MEAL',
     SIGN_UP: 'SIGN_UP',
-    LOGOUT: 'LOGOUT'
+    LOGOUT: 'LOGOUT',
+    LOADED: 'LOADED'
 }

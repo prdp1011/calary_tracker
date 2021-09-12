@@ -9,7 +9,6 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state);
   const meals = useSelector(state => state.meal.meals);
-  console.log(state)
 
   useEffect(() => {
     dispatch(fetchMeals(history));

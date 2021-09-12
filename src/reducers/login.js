@@ -10,21 +10,18 @@ const loginReducer = (state = initialState, action) => {
     case ACTION.LOGIN:
       return deepCopy({
         ...state,
-        loading: false,
         isAuthorised: true
     })
     case ACTION.SIGN_UP:
       return deepCopy({
         ...state,
-        isAuthorised: true,
-        loading: false,
+        isAuthorised: true
     })
     case ACTION.LOGOUT:
-      return deepCopy({
+      return {
         ...state,
-        isAuthorised: false,
-        loading: false,
-    })
+        isAuthorised: false
+    }
     default: return state
   }
 }

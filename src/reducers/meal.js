@@ -18,6 +18,7 @@ const mealReducer = (state = INTIAL_STATE, action) => {
     case ACTION.SELECTED_MEAL:
       return deepCopy({
         ...state,
+        loading: false,
         selected_meal: action.payload || {...SELECTED_MEAL},
     })
     case ACTION.ERROR:
@@ -25,6 +26,11 @@ const mealReducer = (state = INTIAL_STATE, action) => {
         ...state,
         loading: false,
         error: action.payload
+      })
+      case ACTION.LOADED:
+      return deepCopy({
+        ...state,
+        loading: false
       })
     default: return state
   }

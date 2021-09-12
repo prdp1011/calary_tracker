@@ -10,8 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
-    localStorage.setItem('isAuthenticated', 'false');
-    dispatch(action_logout(history))
+    dispatch(action_logout(null, history))
   }
   return (
     <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark maroon-bg">
@@ -20,7 +19,7 @@ const Header = () => {
       <ul className="navbar-nav ml-auto">
         <li className={`nav-item dropdown`} >
           <div >
-            <a  href="#" onClick={logout}>Logout</a>
+            <button className="btn btn-link"  href="#" onClick={logout}>Logout</button>
           </div>
         </li>
       </ul>

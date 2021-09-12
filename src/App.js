@@ -12,6 +12,8 @@ import NoMatch from './components/NoMatch';
 import Loader from './components/Loader';
 import Header from './components/Header';
 import ApplicationError from './components/ErrorPages/ApplicationError';
+import ApiLoader from './components/ApiLoader/ApiLoader';
+import {  useSelector } from "react-redux";
 
 
 const DashComp = React.lazy(() => import('./components/Dashboard'));
@@ -58,7 +60,12 @@ const PrivateRoute = ({ children, ...rest }) => {
 }
 
 function App() {
+  const isLoading = useSelector((state) =>  state.meal.loading);
+ console.log(isLoading)
   return (
+    <>
+      { isLoading && <ApiLoader/>}
+      <div style = {{display: isLoading ? 'none': 'block'}}>
       <Router>
       <Switch>
         <PrivateRoute exact path={ROUTES.MAIN}>
@@ -78,7 +85,8 @@ function App() {
           <NoMatch />
         </Route>
       </Switch>
-    </Router>
+    </Router></div>
+    </>
   );
 }
 

@@ -24,6 +24,12 @@ export const modifiedMeals =  (res) => {
         }
       }
 
+      if(items.length < 2){
+        const color = count >= 2000 ? 'red': ''
+        refs.forEach((ele) => {
+          ele.color = color;
+        })
+      }
     }
     return items;
 }

@@ -4,13 +4,8 @@ import { startloading, apiFailure } from "../actions/common";
 import { ROUTES } from '../constants';
 
 
-const Api = axios;
-// .create({
-//   baseURL: 'http://localhost:9000/'
-// });
 const error_msg = (dispatch, error, history = null) => {
     dispatch(apiFailure(error.message));
-    console.log(error.response)
     alert(error.response.data.message);
     if(error.response.status === 401){
       localStorage.setItem('isAuthenticated', 'false');
@@ -23,7 +18,6 @@ const Get =  (url) => async (dispatch, history) => {
     try {
       return await axios.get(url);
     } catch (error) {
-      console.log(error)
       return error_msg(dispatch, error, history);
     }
 }
